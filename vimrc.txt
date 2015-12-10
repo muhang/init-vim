@@ -1,0 +1,162 @@
+set nocompatible              " be iMproved, required
+
+" Pathogen installs
+"
+" Functionality
+" -------------
+"
+" ag.vim                Smart code search with :Ag using the_silver_searcher
+" YouCompleteMe         Intelligent autocompletion -- requires setup
+" emmet-vim             Emmet syntax expansion with <Ctrl-y>
+" gundo                 Crazy undoing
+" nerdcommenter         Macros for commenting
+" nerdtree              File explorer sidebar
+" nerdtree-git-plugin   Show git status in NERDTREE
+" supertab              Use <Tab> for all Vim insertions (like autocomplete)
+" tabular               :Tab REGEX to align text around char (i.e. :Tab /=)
+" vim-fugitive          Tons of git commands
+" vim-gitgutter         Show git status of line in sidebar
+" vim-indent-guides     Toggle indet guides with \ig
+" vim-pad               Notepad
+" vim-surround          Macros for surrounding text
+" vim-windowswap        Use \ww to swap buffers
+"
+" Themes
+" ------
+" zenburn
+" monokai
+" base16-vim
+" vim-colors-solarized
+" vim-distinguished
+" vim-kalisi
+"
+" Syntax
+" ------
+" yajs.vim
+" scss-syntax.vim
+" javascript-libraries-syntax.vim
+" mustache
+" vim-go
+" vim-cpp-enhanced-highlight
+" vim-jade
+" vim-jsx
+
+" Vundle init
+"
+"
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Other plugins here
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+" Theme and colors
+"
+"
+set nowrap
+syntax on
+
+" Terminal colors
+"let base16colorspace=256 " Access colors present in 256 colorspace
+set t_Co=256
+
+colorscheme monokai         " base16-tomorrow
+
+" Solarized options  (uncomment if using solarized)
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
+
+" Set syntax highlighting for specific JS libraries
+let g:used_javascript_libs = 'react,underscore,jquery,handlebars'
+
+
+
+execute pathogen#infect()
+
+" NERDTree startup options
+"
+"
+"autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+""" Keymaps
+"
+"
+" Plugins
+map <C-n> :NERDTreeToggle<CR>
+nnoremap <F5> :GundoToggle<CR>
+" Sizing
+nnoremap <S-Up> :vertical resize +5<CR>
+nnoremap <S-Down> :vertical resize -5<CR>
+nnoremap <Up> :resize +5<CR>
+nnoremap <Down> :resize -5<CR>
+nnoremap <S-Right> :vertical resize 150<CR>
+nnoremap <S-Left> :vertical resize 60<CR>
+nnoremap <Right> :resize 40<CR>
+nnoremap <Left> :resize 10<CR>
+" Clear search highlighting
+nnoremap <Space> :noh<CR>
+
+" Editor
+"
+"
+" Line numbers
+set number
+
+""Only show line number in current pane
+":au WinEnter * :setlocal number
+":au WinLeave * :setlocal nonumber
+
+" Tab sanity
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+" Vertical rule
+set colorcolumn=80
+
+" Highlight current line
+set cursorline
+
+" Only do line highlight and verical rule in current window
+:au WinEnter * :setlocal cursorline
+:au WinLeave * :setlocal nocursorline
+:au WinEnter * :setlocal colorcolumn=80
+:au WinLeave * :setlocal colorcolumn=0
+
+" Set directory for vimpad
+let g:pad#dir = "~/notes/"
+
+" Font
+set guifont=InputMono
+
+" Powerline settings
+"let g:Powerline_symbols = 'unicode'
+"set encoding=utf-8
+"set fillchars+=stl:\ ,stlnc:\
+"set termencoding=utf-8
+
+hi Normal ctermbg=none
+
+" Search
+set hlsearch        " Highlight search results
+set incsearch       " Search as I type
+
+" gVim / mVim
+if has('gui_running')
+    set linespace=3
+    set guifont=InputMono\ 10
+endif
